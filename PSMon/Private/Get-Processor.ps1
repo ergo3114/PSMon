@@ -42,11 +42,11 @@
         $void = $Object.Add($objs)
 
         Write-Verbose "Getting logical data about processor"
-        if([double]$Object.Percentage -ge $ErrorThreshold){
+        if([double]$Object.Percentage.Replace("%","") -ge $ErrorThreshold){
             Write-Verbose "Processor met criteria for error"
             $Object = $Object | Select-Object *, @{n='Status';e={Write-Output 'Error'}}
             $void = $ReturnedObjects.Add($Object)
-        } elseif([double]$Object.Percentage -ge $WarningThreshold){
+        } elseif([double]$Object.Percentage.Replace("%","") -ge $WarningThreshold){
             Write-Verbose "Processor met criteria for warning"
             $Object = $Object | Select-Object *, @{n='Status';e={Write-Output 'Warning'}}
             $void = $ReturnedObjects.Add($Object)
