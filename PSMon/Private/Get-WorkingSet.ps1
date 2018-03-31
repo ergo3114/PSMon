@@ -69,6 +69,8 @@
                 Write-Verbose "$($Object.PID) - $($Object.Name) met criteria for warning"
                 $Object = $Object | Select-Object *, @{n='Percentage';e={Write-Output "$([math]::Round($Percentage,2))"}}, @{n='Status';e={Write-Output 'Warning'}}
                 $void = $ReturnedObjects.Add($Object)
+            } else{
+                $void = $ReturnedObjects.Add('No_Matches')
             }
         }
     }

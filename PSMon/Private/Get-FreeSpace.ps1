@@ -53,6 +53,8 @@
                 Write-Verbose "Processor met criteria for warning"
                 $Object = $Object | Select-Object *, @{n='Status';e={Write-Output 'Warning'}}
                 $void = $ReturnedObjects.Add($Object)
+            } else{
+                $void = $ReturnedObjects.Add('No_Matches')
             }
         }
     }
