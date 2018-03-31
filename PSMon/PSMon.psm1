@@ -15,4 +15,11 @@
         }
     }
 
+#Setup PSMon variable
+    $PSMon = @{
+        ModuleRoot = $PSScriptRoot
+        ConfigFile = "$PSScriptRoot\bin\PSMon.config"
+    }
+
+Export-ModuleMember -Variable PSMon
 Export-ModuleMember -Function $Public.Basename
