@@ -1,4 +1,4 @@
-﻿function Install-PSMon{
+﻿function Install-Monitoring{
     [cmdletbinding()]
     Param(
         [Parameter(Mandatory=$false)]

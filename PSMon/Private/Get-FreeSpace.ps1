@@ -1,4 +1,4 @@
-﻿function Get-PSMonFreeSpace{
+﻿function Get-FreeSpace{
     [cmdletbinding()]
     Param(
         [Parameter(Mandatory=$false)]

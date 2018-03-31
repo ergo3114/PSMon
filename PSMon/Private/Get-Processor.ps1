@@ -1,4 +1,4 @@
-﻿function Get-PSMonProcessor{
+﻿function Get-Processor{
     [cmdletbinding()]
     Param(
         [Parameter(Mandatory=$false)]

@@ -1,4 +1,4 @@
-﻿function Get-PSMonWorkingSet{
+﻿function Get-WorkingSet{
     [cmdletbinding()]
     Param(
         [Parameter(Mandatory=$false)]
