@@ -29,7 +29,7 @@ function Init{
         if(!(Test-Path $PSMon.ConfigFile)){
             Write-Verbose "Recreating configuration file"
             if ($pscmdlet.ShouldProcess($PSMon.ConfigFile, "Recreate Config File")){
-                New-Item -Path $PSMon.ConfigFile -ItemType File -Value $stringConfig | Out-Null
+                New-Item -Path $PSMon.ConfigFile -ItemType File -Value $stringConfig
             }
         }
     }
