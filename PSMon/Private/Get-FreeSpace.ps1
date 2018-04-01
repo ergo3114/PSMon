@@ -5,10 +5,16 @@
         $ComputerName = $env:COMPUTERNAME,
 
         [Parameter(Mandatory=$false)]
-        [double]$WarningThreshold = 25,
+        [double]$WarningThreshold = {
+            $xml = [xml](Get-Content $PSMon.ConfigFile);
+            ($xml.Configuration.Function|Where-Object {$_.ID -eq "Get-PSMonFreeSpace"}).WarningThreshold
+        },
 
         [Parameter(Mandatory=$false)]
-        [double]$ErrorThreshold = 10
+        [double]$ErrorThreshold = {
+            $xml = [xml](Get-Content $PSMon.ConfigFile);
+            ($xml.Configuration.Function|Where-Object {$_.ID -eq "Get-PSMonFreeSpace"}).ErrorThreshold
+        }
     )
 
     BEGIN{
@@ -52,9 +58,10 @@
                 Write-Verbose "Processor met criteria for warning"
                 $Object = $Object | Select-Object *, @{n='Status';e={Write-Output 'Warning'}}
                 $void = $ReturnedObjects.Add($Object)
-            } else{
-                $void = $ReturnedObjects.Add('No_Matches')
             }
+        }
+        if($ReturnedObjects -eq $null){
+            $void = $ReturnedObjects.Add('No_Matches')
         }
     }
 

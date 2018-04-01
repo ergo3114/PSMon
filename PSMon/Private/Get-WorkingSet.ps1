@@ -5,10 +5,16 @@
         $ComputerName = $env:COMPUTERNAME,
 
         [Parameter(Mandatory=$false)]
-        [double]$WarningThreshold = 10,
+        [double]$WarningThreshold = {
+            $xml = [xml](Get-Content $PSMon.ConfigFile);
+            ($xml.Configuration.Function|Where-Object {$_.ID -eq "Get-PSMonWorkingSet"}).WarningThreshold
+        },
 
         [Parameter(Mandatory=$false)]
-        [double]$ErrorThreshold = 20,
+        [double]$ErrorThreshold = {
+            $xml = [xml](Get-Content $PSMon.ConfigFile);
+            ($xml.Configuration.Function|Where-Object {$_.ID -eq "Get-PSMonWorkingSet"}).ErrorThreshold
+        },
 
         [Parameter(Mandatory=$false)]
         [int]$Top = $null
@@ -68,9 +74,10 @@
                 Write-Verbose "$($Object.PID) - $($Object.Name) met criteria for warning"
                 $Object = $Object | Select-Object *, @{n='Percentage';e={Write-Output "$([math]::Round($Percentage,2))"}}, @{n='Status';e={Write-Output 'Warning'}}
                 $void = $ReturnedObjects.Add($Object)
-            } else{
-                $void = $ReturnedObjects.Add('No_Matches')
             }
+        }
+        if($ReturnedObjects -eq $null){
+            $void = $ReturnedObjects.Add('No_Matches')
         }
     }
 
