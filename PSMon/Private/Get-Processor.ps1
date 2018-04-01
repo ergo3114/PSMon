@@ -5,16 +5,10 @@
         $ComputerName = $env:COMPUTERNAME,
 
         [Parameter(Mandatory=$false)]
-        [double]$WarningThreshold = {
-            $xml = [xml](Get-Content $PSMon.ConfigFile);
-            ($xml.Configuration.Function|Where-Object {$_.ID -eq "Get-PSMonProcessor"}).WarningThreshold
-        },
+        [double]$WarningThreshold = 80,
 
         [Parameter(Mandatory=$false)]
-        [double]$ErrorThreshold = {
-            $xml = [xml](Get-Content $PSMon.ConfigFile);
-            ($xml.Configuration.Function|Where-Object {$_.ID -eq "Get-PSMonProcessor"}).ErrorThreshold
-        }
+        [double]$ErrorThreshold = 90
     )
 
     BEGIN{
@@ -41,7 +35,6 @@
 
     PROCESS{
         $objs = [pscustomobject]@{
-            Name = "Processor"
             Percentage = "$([math]::Round($ProcessorTotal.CookedValue,2))%"
         }
         $void = $Object.Add($objs)

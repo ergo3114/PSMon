@@ -5,16 +5,10 @@
         $ComputerName = $env:COMPUTERNAME,
 
         [Parameter(Mandatory=$false)]
-        [double]$WarningThreshold = {
-            $xml = [xml](Get-Content $PSMon.ConfigFile);
-            ($xml.Configuration.Function|Where-Object {$_.ID -eq "Get-PSMonWorkingSet"}).WarningThreshold
-        },
+        [double]$WarningThreshold = 10,
 
         [Parameter(Mandatory=$false)]
-        [double]$ErrorThreshold = {
-            $xml = [xml](Get-Content $PSMon.ConfigFile);
-            ($xml.Configuration.Function|Where-Object {$_.ID -eq "Get-PSMonWorkingSet"}).ErrorThreshold
-        },
+        [double]$ErrorThreshold = 20,
 
         [Parameter(Mandatory=$false)]
         [int]$Top = $null
