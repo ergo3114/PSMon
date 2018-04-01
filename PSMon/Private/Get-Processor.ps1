@@ -37,7 +37,6 @@
         $objs = [pscustomobject]@{
             Name = "Processor"
             Percentage = "$([math]::Round($ProcessorTotal.CookedValue,2))%"
-            Collected = Get-Date
         }
         $void = $Object.Add($objs)
 

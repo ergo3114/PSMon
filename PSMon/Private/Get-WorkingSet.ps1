@@ -53,7 +53,6 @@
                 PID = $Process.RawValue
                 Name = $Process.InstanceName
                 Value = [uint64]($WorkingSets | Where-Object {$_.Path -eq "$SpecifiedPath\Working Set - Private"}).RawValue
-                Collected = Get-Date
             }
             $void = $StagingObjects.Add($objs)
         }

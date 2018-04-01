@@ -27,6 +27,7 @@ function Get-Monitoring{
         $results.Add('FreeSpace',$FreeSpace)
         $results.Add('Processor',$Processor)
         $results.Add('WorkingSet',$WorkingSet)
+        $results.Add('Collected',$(Get-Date))
     }
 
     END{

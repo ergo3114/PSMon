@@ -38,7 +38,6 @@
             $objs = [pscustomobject]@{
                 DriveLetter = $FreeSpace.InstanceName.ToUpper()
                 Percentage = "$([math]::Round($FreeSpace.CookedValue,2))%"
-                Collected = Get-Date
             }
             $void = $Objects.Add($objs)
         }
