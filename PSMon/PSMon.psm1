@@ -23,3 +23,5 @@
 
 Export-ModuleMember -Variable PSMon
 Export-ModuleMember -Function $Public.Basename
+
+Init
