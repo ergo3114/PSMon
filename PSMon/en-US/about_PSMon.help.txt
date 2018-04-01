@@ -1,0 +1,19 @@
+TOPIC
+    about_PSMon
+
+SHORT DESCRIPTION
+    PSMon adds basic server/computer monitoring to your environment.
+
+LONG DESCRIPTION
+    PSMon is built to be installed in standalone or client mode. PSMon is available 
+    to integrate into any Windows based environment.
+
+    Standalone mode is used from the technicians device and reports on remote servers and computers.
+
+    Client mode is designed to be installed on a server or computer and report back to a central
+    operations manager.
+
+SEE ALSO
+    Pester wiki: https://github.com/ergo3114/PSMon/wiki
+    Install-PSMonMonitoring
+    Get-PSMonMonitoring

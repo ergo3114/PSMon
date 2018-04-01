@@ -19,6 +19,7 @@
     $PSMon = @{
         ModuleRoot = $PSScriptRoot
         ConfigFile = "$PSScriptRoot\bin\PSMon.config"
+        Mode = "Standalone"
     }
 
 Export-ModuleMember -Variable PSMon
