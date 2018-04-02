@@ -35,6 +35,7 @@ function Get-Monitoring{
                 $results.Add('Processor',$Processor)
                 $results.Add('WorkingSet',$WorkingSet)
                 $results.Add('Collected',$(Get-Date))
+                $results.Add('ComputerName',$env:COMPUTERNAME)
             }
             catch{
                 Write-Error "$($PSItem.ToString)"
@@ -48,6 +49,19 @@ function Get-Monitoring{
         if($flag){
             return -1
         }
-        return $results
+        switch($PSMon.DefaultOutput){
+            "pscustomobject"{
+                return [pscustomobject]$results
+            }
+            "XML"{
+                return [pscustomobject]$results | ConvertTo-XML
+            }
+            "HTML"{
+                return [pscustomobject]$results | ConvertTo-Html
+            }
+            default{
+                return $results
+            }
+        }
     }
 }
