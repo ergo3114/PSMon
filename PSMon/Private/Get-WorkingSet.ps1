@@ -2,7 +2,7 @@
     [cmdletbinding()]
     Param(
         [Parameter(Mandatory=$false)]
-        $ComputerName = $env:COMPUTERNAME,
+        $ComputerName = $PSMon.ComputerName,
 
         [Parameter(Mandatory=$false)]
         [double]$WarningThreshold = 10,
