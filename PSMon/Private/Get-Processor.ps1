@@ -21,7 +21,7 @@
         try{
             if($ComputerName -ne $env:COMPUTERNAME){
                 Write-Verbose "Attempting to get processor info from remote computer"
-                $ProcessorTotal = (Get-Counter -ComputerName $ComputerName "\processor(_total)\% processor time" -ErrorAction Stop).CounterSamples
+                $ProcessorTotal = Invoke-Command -ComputerName $ComputerName -Credential -ScriptBlock {(Get-Counter "\processor(_total)\% processor time" -ErrorAction Stop).CounterSamples}
             } else{
                 Write-Verbose "Attempting to get processor info from local computer"
                 $ProcessorTotal = (Get-Counter "\processor(_total)\% processor time" -ErrorAction Stop).CounterSamples

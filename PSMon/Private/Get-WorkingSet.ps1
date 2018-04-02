@@ -24,9 +24,11 @@
         try{
             if($ComputerName -ne $env:COMPUTERNAME){
                 Write-Verbose "Attempting to get working set info from remote computer"
-                $Processes = (Get-Counter -ComputerName $ComputerName "\Process(*)\ID Process" -ErrorAction Stop).CounterSamples | Where-Object {$_.InstanceName -ne "_total"}
-                $WorkingSets = (Get-Counter -ComputerName $ComputerName ($Processes.Path -replace "\\id process$","\Working Set - Private") -ErrorAction Stop).CounterSamples
-                $WSTotal = (Get-Counter -ComputerName $ComputerName "\Process(_total)\Working Set - Private" -ErrorAction Stop).CounterSamples.RawValue
+                Invoke-Command -ComputerName $ComputerName -Credential -ScriptBlock {
+                    $Processes = (Get-Counter "\Process(*)\ID Process" -ErrorAction Stop).CounterSamples | Where-Object {$_.InstanceName -ne "_total"}
+                    $WorkingSets = (Get-Counter ($Processes.Path -replace "\\id process$","\Working Set - Private") -ErrorAction Stop).CounterSamples
+                    $WSTotal = (Get-Counter "\Process(_total)\Working Set - Private" -ErrorAction Stop).CounterSamples.RawValue
+                }
             } else{
                 Write-Verbose "Attempting to get working set info from local computer"
                 $Processes = (Get-Counter "\Process(*)\ID Process" -ErrorAction Stop).CounterSamples | Where-Object {$_.InstanceName -ne "_total"}

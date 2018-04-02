@@ -10,6 +10,9 @@ function Get-Monitoring{
 
         Write-Verbose "Setting up variables"
         $results = @{}
+        if($PSMon.ComputerName -ne $ComputerName){
+            $PSMon.ComputerName = $ComputerName
+        }
 
         Write-Verbose "Getting function defaults"
         if(Test-Path $PSMon.ConfigFile){
