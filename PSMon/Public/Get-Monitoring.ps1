@@ -45,7 +45,7 @@ function Get-Monitoring{
 
     END{
         Write-Verbose "[$(Get-Date)] $($MyInvocation.MyCommand) has completed"
-        if($flag -lt 0){
+        if($flag){
             return -1
         }
         return $results
