@@ -17,13 +17,15 @@
 
 #Setup PSMon variable
     $PSMon = @{
-        Mode = "Standalone"
+        Mode = "Server" #Client
         Root = $PSScriptRoot
         ConfigFile = "$PSScriptRoot\bin\PSMon.config"
         Start = "$PSScriptRoot\Public\Get-Monitoring.ps1"
         ScheduledTask = @{
             Monitoring = "PSMon-Monitoring"
         }
+        DefaultOutput = "pscustomobject" #HTML, JSON
+        ComputerName = $env:COMPUTERNAME
     }
 
 Export-ModuleMember -Variable PSMon
