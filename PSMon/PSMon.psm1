@@ -17,9 +17,13 @@
 
 #Setup PSMon variable
     $PSMon = @{
-        ModuleRoot = $PSScriptRoot
-        ConfigFile = "$PSScriptRoot\bin\PSMon.config"
         Mode = "Standalone"
+        Root = $PSScriptRoot
+        ConfigFile = "$PSScriptRoot\bin\PSMon.config"
+        Start = "$PSScriptRoot\Public\Get-Monitoring.ps1"
+        ScheduledTask = @{
+            Monitoring = "PSMon-Monitoring"
+        }
     }
 
 Export-ModuleMember -Variable PSMon

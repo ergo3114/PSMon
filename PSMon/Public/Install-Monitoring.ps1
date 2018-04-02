@@ -14,15 +14,18 @@
     BEGIN{
         Write-Verbose "[$(Get-Date)] $($MyInvocation.MyCommand) has started"
 
-        if($Repair -or $(Test-Path $PSMon.ConfigFile)){
+        if($Repair){
             Write-Verbose "Running Init"
             Init
+            SchTsk
             Return
         }
     }
 
     PROCESS{
-        
+        #region Scheduled Task
+        SchTsk -PollingCycle $PollingCycle
+        #endregion
     }
 
     END{
@@ -30,5 +33,4 @@
     }
     #Create Scheduled Tasks based on parameters
     #Send to email if not null
-    #repair
 }
